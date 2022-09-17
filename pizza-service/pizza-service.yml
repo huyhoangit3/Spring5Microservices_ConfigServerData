@@ -1,0 +1,41 @@
+spring:
+  ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+  datasource:
+    url: jdbc:postgresql://localhost:5432/microservice
+    username: microservice
+    # Using environment variable ENCRYPT_KEY=ENCRYPT_KEY
+    # Getting the value with POST localhost:8888/encrypt and the password in its body
+    # Raw password: microservice
+    password: "{cipher}f0c0759246b4a96350c570136adbe3ac9ff4e89c5a0bc37a553a4d7b4ded1b62"
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        jdbc:
+          lob:
+            # With Java >= 9, to avoid:
+            # SQLFeatureNotSupportedException: Method PgConnection.createClob() is not yet implemented
+            non_contextual_creation: true
+        # To include custom functions we want to use in HQL queries
+        metadata_builder_contributor: com.pizza.configuration.persistence.SqlFunctionsMetadataBuilderContributor
+
+security:
+  restApi:
+    authenticationInformation: http://localhost:5555/security/jwt/authinfo
+    clientId: Spring5Microservices
+    # Raw password: Spring5Microservices
+    clientPassword: "{cipher}9f746b78f2d521d96cacf9fa65913048ef971dc242030ca5d8c7a56ddf90093cb58dfe71b66255df8ffe1d543680fe88"
+
+rest:
+  connect:
+    timeoutInMilliseconds: 5000
+  read:
+    timeoutInMilliseconds: 30000
+  write:
+    timeoutInMilliseconds: 30000
+
+cache:
+  userBlacklist:
+    entryCapacity: 20
+    expireInSeconds: 600
+    name: userBlackListCache

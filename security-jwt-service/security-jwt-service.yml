@@ -1,0 +1,32 @@
+spring:
+  ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+  datasource:
+    url: jdbc:postgresql://localhost:5432/microservice
+    username: microservice
+    # Using environment variable ENCRYPT_KEY=ENCRYPT_KEY
+    # Getting the value with POST localhost:8888/encrypt and the password in its body
+    # Raw password: microservice
+    password: "{cipher}f0c0759246b4a96350c570136adbe3ac9ff4e89c5a0bc37a553a4d7b4ded1b62"
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        jdbc:
+          lob:
+            # With Java >= 9, to avoid:
+            # SQLFeatureNotSupportedException: Method PgConnection.createClob() is not yet implemented
+            non_contextual_creation: true
+        # ONLY REQUIRED for the multi-datasource version of security-jwt-service (there is a git branch with it)
+        implicit_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+
+security:
+  jwe:
+    # Raw encryptionSecret: 841d8A6C80C#A4FcAf32D5367t1!C53b
+    encryptionSecret: "{cipher}bf7c79f1a7cbd56cb1f10ccc0c8e6440ba552315e86789253ede14e62a4f007ea680136668b4b95ace78506e9c247bcf20b2a88da4baf5c111e6396e67c69236"
+
+cache:
+  jwtConfiguration:
+    entryCapacity: 2
+    expireInSeconds: 3600
+    name: jwtConfigurationCache
