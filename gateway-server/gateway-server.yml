@@ -13,7 +13,7 @@ zuul:
     security-jwt-service:
       path: /security/jwt/**
       # By default, the proxy prefix is stripped from the request before the request is forwarded by
-      stripPrefix: true
+      stripPrefix: false
     security-oauth-service:
       path: /security/oauth/**
       # By default, the proxy prefix is stripped from the request before the request is forwarded by
