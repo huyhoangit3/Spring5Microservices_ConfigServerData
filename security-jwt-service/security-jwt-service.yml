@@ -4,6 +4,7 @@ spring:
     url: jdbc:mariadb://172.17.0.2:3306/microservice
     username: root
     password: techbro@123
+    driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
