@@ -1,16 +1,13 @@
 spring:
   ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
   datasource:
-    url: jdbc:postgresql://localhost:5432/microservice
-    username: microservice
-    # Using environment variable ENCRYPT_KEY=ENCRYPT_KEY
-    # Getting the value with POST localhost:8888/encrypt and the password in its body
-    # Raw password: microservice
-    password: "{cipher}f0c0759246b4a96350c570136adbe3ac9ff4e89c5a0bc37a553a4d7b4ded1b62"
+    url: jdbc:mariadb://172.17.0.2:3306/microservice
+    username: root
+    password: techbro@123
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         jdbc:
           lob:
             # With Java >= 9, to avoid:
